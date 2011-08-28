@@ -1,0 +1,9 @@
+# config/rackspace.yml
+development:
+    container: sai_digital_skeleton_development #Change this for your project
+    username: YOUR_USERNAME_HERE
+    api_key: YOUR_API_KEY_HERE
+production:
+    container: sai_digital_skeleton_production #Change this for your project
+    username: YOUR_USERNAME_HERE
+    api_key: YOUR_API_KEY_HERE
