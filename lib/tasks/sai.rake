@@ -36,8 +36,8 @@ namespace :sai do
     puts "Replacing skeleton defaults with your project's name."
 
      
-    %x{find #{::Rails.root.to_s}/./ -type f -print0 | xargs -0 sed -i 's/sai_digital_skeleton/#{project_name}/'}
-    %x{find #{::Rails.root.to_s}/./ -type f -print0 | xargs -0 sed -i 's/SaiDigitalSkeleton/#{project_name.classify}/'}
+    %x{find #{::Rails.root.to_s}/./ -type f -print0 | xargs -0 sed -i 's/sai_digital_skeleton/#{project_name}/g'}
+    %x{find #{::Rails.root.to_s}/./ -type f -print0 | xargs -0 sed -i 's/SaiDigitalSkeleton/#{project_name.classify}/g'}
    
     
     puts ""
