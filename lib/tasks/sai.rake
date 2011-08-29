@@ -1,6 +1,9 @@
 #Which version of Ruby do we want to use with rvm?
 RVM_RUBY_VERSION = 'ree'
 
+#Change this if your RVM is in a different location
+RVM_SCRIPT_LOCATION = '~/.rvm/scripts/rvm'
+
 namespace :sai do
 
   desc 'Initialize project.'
@@ -24,6 +27,11 @@ namespace :sai do
     #TODO: Make transliteration work for our international friends.
     project_name = STDIN.gets.underscore.gsub(/\s+/,'')
 
+    puts ""
+    puts "Creating RVM project file."
+    %x{cd #{Rails.root.to_s}}
+    %x{#{RVM_SCRIPT_LOCATION} --rvmrc --create #{RVM_RUBY_VERSION}@#{project_name}}
+    
 
     #TODO: Figure out a safe way to implement the following
     #puts ""
@@ -39,17 +47,11 @@ namespace :sai do
     %x{find #{::Rails.root.to_s}/./ -type f -print0 | xargs -0 sed -i 's/sai_digital_skeleton/#{project_name}/'}
     %x{find #{::Rails.root.to_s}/./ -type f -print0 | xargs -0 sed -i 's/SaiDigitalSkeleton/#{project_name.classify}/'}
    
-    puts ""
-    puts "Creating RVM project file."
-    %x{cd #{Rails.root.to_s}}
-    %x{rvm --rvmrc --create #{RVM_RUBY_VERSION}@#{project_name}}
     
     puts ""
-    puts "Running bundle install."
-    %{bundle install} 
-
-    puts ""
     puts "If you didn't see any errors, you should be good to go."
+    puts "You will need to rename your project folder to #{project_name}."
+    puts "Then, you will need to run bundle install rails (probably)."
   end
 
 end
